@@ -1,0 +1,15 @@
+<div>
+  <h3>{{ book.id ? 'Edit Book' : 'Add Book' }}</h3>
+  <form (submit)="saveBook(); $event.preventDefault();">
+    <label>Title:</label>
+    <input type="text" [(ngModel)]="book.title" required>
+
+    <label>Author:</label>
+    <input type="text" [(ngModel)]="book.author" required>
+
+    <label>Read:</label>
+    <input type="checkbox" [(ngModel)]="book.read">
+
+    <button type="submit">{{ book.id ? 'Update' : 'Add' }}</button>
+  </form>
+</div>

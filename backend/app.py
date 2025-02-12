@@ -5,7 +5,7 @@ from models import db
 from schemas import ma
 from routes import book_bp
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='static')
 app.config.from_object(Config)
 
 # Inicializar base de datos y Marshmallow
@@ -17,7 +17,7 @@ app.register_blueprint(book_bp)
 
 # Configurar Swagger
 SWAGGER_URL = "/swagger"
-API_URL = "/static/swagger.json"
+API_URL = "static/swagger.json"
 swagger_ui_blueprint = get_swaggerui_blueprint(SWAGGER_URL, API_URL)
 app.register_blueprint(swagger_ui_blueprint, url_prefix=SWAGGER_URL)
 

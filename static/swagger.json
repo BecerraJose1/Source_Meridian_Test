@@ -1,0 +1,20 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Book API",
+        "description": "API for managing books",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/books": {
+            "get": {
+                "summary": "Get all books",
+                "responses": {
+                    "200": {
+                        "description": "A list of books"
+                    }
+                }
+            }
+        }
+    }
+}
