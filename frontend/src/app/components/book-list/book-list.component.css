@@ -1,0 +1,31 @@
+/* Estilos generales */
+.container {
+  max-width: 800px;
+  margin: auto;
+}
+
+/* Estilo para la tabla */
+.table th, .table td {
+  vertical-align: middle;
+}
+
+.table-hover tbody tr:hover {
+  background-color: #f1f1f1;
+}
+
+/* Estilos para los botones */
+.btn {
+  transition: all 0.3s ease-in-out;
+}
+
+.btn:hover {
+  transform: scale(1.05);
+}
+
+/* Tarjeta de formulario */
+.card {
+  background: linear-gradient(135deg, #5daccc 0%, #42aab8 100%);
+  color: white;  /* Texto en blanco para contraste */
+  border-radius: 12px;
+}
+

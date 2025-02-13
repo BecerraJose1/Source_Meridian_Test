@@ -14,7 +14,7 @@ def get_books():
     return books_schema.dump(books)
 
 # Obtener un libro por ID
-@book_bp.route('/books/<string:book_id>', methods=['GET'])
+@book_bp.route('/book/<string:book_id>', methods=['GET'])
 def get_book(book_id):
     book = Book.query.get(book_id)
     if not book:
@@ -22,7 +22,7 @@ def get_book(book_id):
     return book_schema.jsonify(book)
 
 # Agregar un nuevo libro
-@book_bp.route('/books', methods=['POST'])
+@book_bp.route('/add/book', methods=['POST'])
 def add_book():
     data = request.json
     new_book = Book(
@@ -36,7 +36,7 @@ def add_book():
     return book_schema.dump(new_book), 201
 
 # Editar un libro
-@book_bp.route('/books/<string:book_id>', methods=['PUT'])
+@book_bp.route('/edit/book/<string:book_id>', methods=['PUT'])
 def update_book(book_id):
     book = Book.query.get(book_id)
     if not book:
@@ -51,7 +51,7 @@ def update_book(book_id):
     return book_schema.dump(book)
 
 # Eliminar un libro
-@book_bp.route('/books/<string:book_id>', methods=['DELETE'])
+@book_bp.route('/delete/book/<string:book_id>', methods=['DELETE'])
 def delete_book(book_id):
     book = Book.query.get(book_id)
     if not book:

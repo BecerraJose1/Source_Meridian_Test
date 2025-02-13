@@ -1,23 +1,44 @@
-<div>
-  <h2>Book List</h2>
-  <table>
-    <thead>
-      <tr>
-        <th>Title</th>
-        <th>Author</th>
-        <th>Read</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let book of books">
-        <td>{{ book.title }}</td>
-        <td>{{ book.author }}</td>
-        <td>{{ book.read ? '✔' : '❌' }}</td>
-        <td>
-          <button (click)="deleteBook(book.id)">Delete</button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+<div class="container mt-4">
+  <!-- FORMULARIO -->
+  <hr>
+  <div class="card shadow-sm p-4 mb-4 bg-white rounded">
+    <h1 class="text-center">{{ selectedBook.id ? '✏ Edit Book' : '➕ Add Book' }}</h1>
+    <app-book-form [book]="selectedBook" (bookSaved)="loadBooks()"></app-book-form>
+  </div>
+  <hr>
+  <!-- LISTA DE LIBROS -->
+  <h1 class="text-center mt-4 mb-3">📚 Book List</h1>
+
+  <div class="table-responsive">
+    <table class="table table-striped table-hover table-bordered align-middle">
+      <thead class="table-primary">
+        <tr>
+          <th scope="col">📖 Title</th>
+          <th scope="col">✍ Author</th>
+          <th scope="col">✅ Read</th>
+          <th scope="col">⚙ Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let book of books">
+          <td>{{ book.title }}</td>
+          <td>{{ book.author }}</td>
+          <td>
+            <span class="badge" [ngClass]="book.read_flag ? 'bg-success' : 'bg-danger'">
+              {{ book.read_flag ? '✔ Read' : '❌ Not Read' }}
+            </span>
+          </td>
+          <td>
+            <button class="btn btn-outline-warning btn-sm me-2" (click)="selectBook(book)">
+              ✏ Edit
+            </button>
+            <button class="btn btn-outline-danger btn-sm" (click)="deleteBook(book.id)">
+              🗑 Delete
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <hr>
 </div>

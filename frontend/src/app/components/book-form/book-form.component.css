@@ -1,0 +1,15 @@
+/* Estilo del formulario */
+form {
+  max-width: 500px;
+  margin: auto;
+}
+
+/* Estilos del botón */
+.btn-success {
+  transition: all 0.3s ease-in-out;
+}
+
+.btn-success:hover {
+  background-color: #28a745;
+  transform: scale(1.1);
+}
