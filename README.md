@@ -62,7 +62,6 @@ book-management/
 ## 🖥️ Accessing the Application
 - **Frontend:** `http://localhost:4200`
 - **Backend API:** `http://localhost:5000`
-- **Database (MySQL):** Accessible on `localhost:3506`
 
 ## 🗄️ Database Initialization
 The database is automatically set up when the MySQL container starts. The following SQL script initializes the database and inserts some sample data:
