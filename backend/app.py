@@ -6,8 +6,9 @@ from config import Config
 from models import db
 from schemas import ma
 from routes import book_bp
+from flask import send_from_directory
 
-app = Flask(__name__, static_folder='static')
+app = Flask(__name__, static_folder='/backend/static')
 app.config.from_object(Config)
 
 CORS(app, resources={r"/*": {"origins": "*"}})  
@@ -27,9 +28,16 @@ if not hasattr(db, 'initialized'):
 app.register_blueprint(book_bp)
 
 SWAGGER_URL = "/swagger"
-API_URL = "static/swagger.json"
+API_URL = "/static/swagger.json"
 swagger_ui_blueprint = get_swaggerui_blueprint(SWAGGER_URL, API_URL)
 app.register_blueprint(swagger_ui_blueprint, url_prefix=SWAGGER_URL)
+
+
+
+@app.route('/static/<path:filename>')
+def serve_static(filename):
+    return send_from_directory('backend/static', filename)
+
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)

@@ -1,19 +1,25 @@
 import pytest
 import json
-from flask import app
+from app import app
+from models import db, Book
+import pytest
+import json
+from app import app
 from models import db, Book
 
 @pytest.fixture
 def client():
-    """ Configura una aplicación de prueba en Flask """
+    """Configura una aplicación de prueba en Flask con SQLite en memoria"""
     app.config["TESTING"] = True
     app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///:memory:"
+    app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+
     with app.test_client() as client:
         with app.app_context():
-            db.create_all()
+            db.create_all()  # Crea las tablas en memoria
         yield client
         with app.app_context():
-            db.drop_all()
+            db.drop_all()  # Borra las tablas al finalizar los tests
 
 def test_get_books(client):
     """ Prueba obtener la lista de libros (debe ser vacía al inicio) """
