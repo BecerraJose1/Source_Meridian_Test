@@ -1,0 +1,47 @@
+version: '3.8'
+
+services:
+  # Base de datos MySQL
+  db:
+    image: mysql:8
+    container_name: mysql_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: db
+      MYSQL_USER: root
+      MYSQL_PASSWORD: example123
+    ports:
+      - "3506:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./backend/db/database.sql:/docker-entrypoint-initdb.d/database.sql  # Carga init.sql al iniciar MySQL
+
+  # Backend Flask
+  backend:
+    build: ./backend
+    container_name: flask_api
+    restart: always
+    depends_on:
+      - db
+    environment:
+      FLASK_APP: app.py
+      FLASK_RUN_HOST: 0.0.0.0
+      DATABASE_URL: mysql+pymysql://root:example123@db:3506/db  # Conexión a la base de datos "db"
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./backend:/app
+
+  # Frontend Angular
+  frontend:
+    build: ./frontend
+    container_name: angular_app
+    restart: always
+    depends_on:
+      - backend
+    ports:
+      - "80:80"
+
+volumes:
+  db_data:
