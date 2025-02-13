@@ -7,3 +7,5 @@ CREATE TABLE IF NOT EXISTS book (
     author VARCHAR(100) NOT NULL,
     read_flag BOOLEAN DEFAULT FALSE
 );
+ALTER USER 'root'@'%' IDENTIFIED WITH 'caching_sha2_password' BY 'rootpassword';
+FLUSH PRIVILEGES;

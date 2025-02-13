@@ -3,9 +3,9 @@ from flask_sqlalchemy import SQLAlchemy
 db = SQLAlchemy()
 
 class Book(db.Model):
-    __tablename__ = "book"  # Define el nombre de la tabla explícitamente
+    __tablename__ = "book"  
 
-    id = db.Column(db.String(32), primary_key=True, nullable=False)  # UUID de 36 caracteres
+    id = db.Column(db.String(32), primary_key=True, nullable=False)
     title = db.Column(db.String(100), nullable=False)
     author = db.Column(db.String(100), nullable=False)
     read_flag = db.Column(db.Boolean, default=False)
